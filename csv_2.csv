@@ -1,0 +1,6 @@
+id,priority,details,status,completed,deadline,project
+1,1,making doors,done,30/4/20,1/5/2020,first
+2,2,making windows,done,24/5/20,1/6/2020,second
+3,2,making walls for clean room,canceled,canceled,1/7/2020,third
+4,1,making doors,pending,in progress,1/8/2020,fourth
+5,3,making clean rooms,pending,in progress,1/9/2020,fifth
