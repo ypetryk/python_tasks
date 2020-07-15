@@ -2,19 +2,22 @@ from pymongo import MongoClient
 import json
 import pandas as pd
 
-
+# creating database and two collections('project','tasks')
 conn = MongoClient(host='localhost', port=27017)
 db = conn.test_db
 project = db.project
 tasks = db.tasks
 
-my_csv = pd.read_csv("./csv_2.csv")
-my_json = my_csv.to_json('data.json')
+# importing data from csv to json
+pd.read_csv("./csv_1.csv").to_json('project.json', orient = 'records', indent = 4)
+pd.read_csv("./csv_2.csv").to_json('tasks.json', orient = 'records', indent = 4)
 
-with open ("./data.json") as f:
+# writing data from json file to collection 'tasks'
+with open('./tasks.json') as f:
     data = json.load(f)
-    project.insert_one(data)
-    for row in project.find({"status":"canceled"}):
-        print(row)
+    for el in data:
+        tasks.insert_one(el)
 
-#Here will be function to convert csv to json
+# fetching 'project name' for 'status = canceled'
+for row in tasks.find({"status":"canceled"}):
+        print(row['project'])
